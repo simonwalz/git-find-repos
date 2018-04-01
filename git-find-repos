@@ -10,11 +10,13 @@ Downloads
 Applications
 Movies
 Pictures
-Music"
+Music
+.\*"
 
-if test "x${GIT_DIR}" = "x"
+GIT_DIRNAME=".git"
+if test "x${GITTWO_DIRNAME}" != "x"
 then
-	GIT_DIR=".git"
+	GIT_DIRNAME="${GITTWO_DIRNAME}"
 fi
 
 ## Script
@@ -24,8 +26,8 @@ find . 	\
 	\( -false $(printf " -or -path */%s/* " $excluded_dirs) \) \
 	-prune -or \
 	-type d \
-	-name "${GIT_DIR}" \
-	-exec git-extended-status "{}" $@ ";"
+	-name "${GIT_DIRNAME}" \
+	-execdir git-extended-status $@ ";"
 
 
 # Add support for git2:
